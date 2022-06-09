@@ -1,0 +1,20 @@
+type Event{
+    id: ID!
+    request: String!
+    browser: String!
+    os: String!
+    device: String!
+    city: String!
+    country: String!
+    create_at: Timestamp!
+}
+
+input Filter {
+    page: Int
+    size: Int
+}
+
+type EventsList{
+    events: [Event!]!
+}
+scalar Timestamp

@@ -1,0 +1,4 @@
+type Query {
+  getEvent(id: ID!): Event!
+  listEvents(input: Filter!): EventsList!
+}
