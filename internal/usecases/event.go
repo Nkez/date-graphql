@@ -12,7 +12,11 @@ type EventI interface {
 }
 
 type Event struct {
-	eventEventRepository repository.EventRepository
+	eventEventRepository *repository.EventRepository
+}
+
+func NewEvent(eventEventRepository *repository.EventRepository) *Event {
+	return &Event{eventEventRepository: eventEventRepository}
 }
 
 func (e *Event) Get(ctx context.Context, id string) (*model.Event, error) {

@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"github.com/Nkez/date-graphql/graph/model"
-	grpc2 "github.com/Nkez/date-graphql/internal/transportn/grpc"
 	date_protobuf "github.com/Nkez/date-protobuf"
 	"github.com/golang/protobuf/ptypes/wrappers"
 )
@@ -14,15 +13,15 @@ type Event interface {
 }
 
 type EventRepository struct {
+	event date_protobuf.EventServiceClient
 }
 
-func (e EventRepository) Get(ctx context.Context, id string) (*model.Event, error) {
-	client, err := grpc2.NewClient()
-	if err != nil {
-		return nil, err
-	}
-	ev, err := client.Get(
-		ctx,
+func NewEventRepository(event date_protobuf.EventServiceClient) *EventRepository {
+	return &EventRepository{event: event}
+}
+
+func (e *EventRepository) Get(ctx context.Context, id string) (*model.Event, error) {
+	ev, err := e.event.Get(ctx,
 		&date_protobuf.GetEvent{
 			Id: id,
 		},
@@ -38,13 +37,12 @@ func (e EventRepository) Get(ctx context.Context, id string) (*model.Event, erro
 		Device:   ev.Device,
 		City:     ev.City,
 		Country:  ev.Country,
-		CreateAt: ev.CreatedAt.String(),
+		CreateAt: ev.CreatedAt.AsTime().String(),
 	}, nil
 }
 
-func (e EventRepository) List(ctx context.Context, filter *model.Filter) (*model.EventsList, error) {
-	client, err := grpc2.NewClient()
-	events, _ := client.List(
+func (e *EventRepository) List(ctx context.Context, filter *model.Filter) (*model.EventsList, error) {
+	events, err := e.event.List(
 		ctx,
 		&date_protobuf.FilterEvent{
 			PageNumber: &wrappers.UInt64Value{
@@ -69,7 +67,7 @@ func (e EventRepository) List(ctx context.Context, filter *model.Filter) (*model
 			Device:   ev.Device,
 			City:     ev.City,
 			Country:  ev.Country,
-			CreateAt: ev.CreatedAt.String(),
+			CreateAt: ev.CreatedAt.AsTime().String(),
 		})
 	}
 
