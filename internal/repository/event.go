@@ -10,6 +10,7 @@ import (
 type Event interface {
 	Get(ctx context.Context, id string) (*model.Event, error)
 	List(ctx context.Context, filter *model.Filter) (*model.EventsList, error)
+	GetExel(ctx context.Context, filter *model.Filter) (*model.File, error)
 }
 
 type EventRepository struct {
@@ -63,7 +64,7 @@ func (e *EventRepository) List(ctx context.Context, filter *model.Filter) (*mode
 			ID:       ev.Id,
 			Request:  ev.TypeRequest,
 			Browser:  ev.Browser,
-			Os:       ev.City,
+			Os:       ev.Os,
 			Device:   ev.Device,
 			City:     ev.City,
 			Country:  ev.Country,

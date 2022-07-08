@@ -14,7 +14,12 @@ input Filter {
     size: Int
 }
 
+type File{
+    url : String!
+}
+
 type EventsList{
     events: [Event!]!
 }
+
 scalar Timestamp

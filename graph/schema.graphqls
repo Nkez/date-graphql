@@ -1,4 +1,13 @@
 type Query {
   getEvent(id: ID!): Event!
   listEvents(input: Filter!): EventsList!
+  getUser(id :ID!) : User!
+  listUsers(input: UserFilter!): UsersList!
+  getExel(input: Filter!) : File!
+}
+
+type Mutation {
+  createUser(input: CreateUser!): ID
+  updateUser(update: UserUpdate!) : ID
+  deleteUser(id: ID!) : ID
 }

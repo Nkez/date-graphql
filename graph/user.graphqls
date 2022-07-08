@@ -1,0 +1,50 @@
+input CreateUser{
+    first_name :String!
+    last_name : String!
+    email: String!
+    user_name: String!
+    country: String!
+    mobile_phone: String!
+    photo: Upload!
+    enabled: Boolean!
+}
+
+type User{
+    id : ID!
+    first_name :String!
+    last_name : String!
+    email: String!
+    user_name: String!
+    country: String!
+    mobile_phone: String!
+    photo: String!
+    enabled: Boolean!
+}
+
+input UserUpdate{
+    id : ID
+    first_name: String
+    last_name: String
+    email: String
+    user_name: String
+    country: String
+    mobile_phone: String
+    photo: Upload
+    enabled: Boolean
+}
+
+input UserFilter{
+    first_name: String
+    second_name: String
+    email: String
+    role: String
+    size: Int
+    page: Int
+    enabled : Boolean
+}
+
+type UsersList{
+    users: [User!]!
+}
+
+scalar Upload

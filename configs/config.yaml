@@ -1,3 +1,21 @@
-port: "8080"
+port: "50080"
 
-grpc: "127.0.0.1:8081"
+grpc:
+  event: "127.0.0.1:8081"
+  user: "127.0.0.1:50051"
+
+s3:
+  endpoint : "localhost:9000"
+  accessKeyID : "mikita"
+  secretAccessKey : "123456789"
+  region : "eu-central-1"
+
+bucket:
+  photo : "photo"
+  exel : "exel"
+
+smtp:
+  email : "libtestgolang@gmail.com"
+  password : "huwboalexscltjqk"
+  host : "smtp.gmail.com"
+  port : 587

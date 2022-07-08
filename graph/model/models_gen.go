@@ -2,6 +2,21 @@
 
 package model
 
+import (
+	"github.com/99designs/gqlgen/graphql"
+)
+
+type CreateUser struct {
+	FirstName   string         `json:"first_name"`
+	LastName    string         `json:"last_name"`
+	Email       string         `json:"email"`
+	UserName    string         `json:"user_name"`
+	Country     string         `json:"country"`
+	MobilePhone string         `json:"mobile_phone"`
+	Photo       graphql.Upload `json:"photo"`
+	Enabled     bool           `json:"enabled"`
+}
+
 type Event struct {
 	ID       string `json:"id"`
 	Request  string `json:"request"`
@@ -17,7 +32,49 @@ type EventsList struct {
 	Events []*Event `json:"events"`
 }
 
+type File struct {
+	URL string `json:"url"`
+}
+
 type Filter struct {
 	Page *int `json:"page"`
 	Size *int `json:"size"`
+}
+
+type User struct {
+	ID          string `json:"id"`
+	FirstName   string `json:"first_name"`
+	LastName    string `json:"last_name"`
+	Email       string `json:"email"`
+	UserName    string `json:"user_name"`
+	Country     string `json:"country"`
+	MobilePhone string `json:"mobile_phone"`
+	Photo       string `json:"photo"`
+	Enabled     bool   `json:"enabled"`
+}
+
+type UserFilter struct {
+	FirstName  *string `json:"first_name"`
+	SecondName *string `json:"second_name"`
+	Email      *string `json:"email"`
+	Role       *string `json:"role"`
+	Size       *int    `json:"size"`
+	Page       *int    `json:"page"`
+	Enabled    *bool   `json:"enabled"`
+}
+
+type UserUpdate struct {
+	ID          *string         `json:"id"`
+	FirstName   *string         `json:"first_name"`
+	LastName    *string         `json:"last_name"`
+	Email       *string         `json:"email"`
+	UserName    *string         `json:"user_name"`
+	Country     *string         `json:"country"`
+	MobilePhone *string         `json:"mobile_phone"`
+	Photo       *graphql.Upload `json:"photo"`
+	Enabled     *bool           `json:"enabled"`
+}
+
+type UsersList struct {
+	Users []*User `json:"users"`
 }
