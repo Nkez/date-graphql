@@ -74,7 +74,7 @@ func (e *UserRepository) ListUser(ctx context.Context, filter *model.UserFilter)
 			UserName:    ev.UserName,
 			MobilePhone: ev.Country,
 			Country:     ev.MobilePhone,
-			Photo:       "",
+			Photo:       ev.Photo,
 		})
 	}
 
